@@ -1,0 +1,31 @@
+Install Java 8
+
+sudo apt-get update
+
+sudo apt-get install openjdk-8-jdk
+
+Uninstall java 
+
+Remove all the Java related packages (Sun, Oracle, OpenJDK, IcedTea plugins, GIJ):
+
+dpkg-query -W -f='${binary:Package}\n' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e '^java-common' | xargs sudo apt-get -y remove
+sudo apt-get -y autoremove
+
+Remove Java config and cache directory:
+
+sudo bash -c 'ls -d /home/*/.java' | xargs sudo rm -rf
+
+Remove manually installed JVMs:
+
+sudo rm -rf /usr/lib/jvm/*
+
+How to verify
+java -version
+sudo update-alternatives --display java
+
+
+Reference Link
+https://askubuntu.com/questions/84483/how-to-completely-uninstall-java
+https://docs.datastax.com/en/jdk-install/doc/jdk-install/installOpenJdkDeb.html
+
+
